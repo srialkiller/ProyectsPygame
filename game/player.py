@@ -1,7 +1,6 @@
 import glob
 import os
 
-
 import pygame
 
 from .config import *
@@ -12,19 +11,18 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, left, bottom, dir_images):
         pygame.sprite.Sprite.__init__(self)
 
-        walk = {pygame.image.load('Walk (1.1).png'), pygame.image.load('Walk (2.2).png'),
-                pygame.image.load('Walk (3.3).png'),
-                pygame.image.load('Walk (4.4).png'), pygame.image.load('Walk (5).png'),
-                pygame.image.load('Walk (6).png'),
-                pygame.image.load('Walk (7).png'), pygame.image.load('Walk (8).png'), pygame.image.load('Walk (9).png'),
-                pygame.image.load('Walk (10).png')}
+        self.image1 = pygame.image.load(os.path.join(dir_images, 'Walk (1.1).png'))
+        self.image2 = pygame.image.load(os.path.join(dir_images, 'Walk (2.2).png'))
 
-        self.image = os.path.join(dir_images, walk)
-        #self.image = pygame.image.load(os.path.join(dir_images, 'wall1.jpg'))
-        #self.image = pygame.Surface((40, 40))
-        #self.image.fill(BLUE)
+        self.listWalk = [self.image1, self.image2]
+        self.posImage = 0
 
-        self.rect = self.image.get_rect()
+        self.imagesWalk = self.listWalk[self.posImage]
+
+        # self.image = pygame.Surface((40, 40))
+        # self.image.fill(BLUE)
+
+        self.rect = self.imagesWalk.get_rect()
         self.rect.left = left
         self.rect.bottom = bottom
 
