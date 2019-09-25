@@ -22,11 +22,14 @@ class Player(pygame.sprite.Sprite):
              pygame.image.load(os.path.join(dir_images, 'Walk (8).png')),
              pygame.image.load(os.path.join(dir_images, 'Walk (9).png')),
              pygame.image.load(os.path.join(dir_images, 'Walk (10).png')),
-             pygame.image.load(os.path.join(dir_images, 'Jump (1).png')),
-             pygame.image.load(os.path.join(dir_images, 'Jump (2).png')),
+             #pygame.image.load(os.path.join(dir_images, 'Jump (1).png')),
+             #pygame.image.load(os.path.join(dir_images, 'Jump (2).png')),
         )
+        #self.image = self.images[0]
+        self.index = 0
+        self.image = self.images[self.index]
 
-        self.image = self.images[0]
+
         # self.image = pygame.Surface((40,1, 40))
         # self.image.fill(BLUE)
 
@@ -62,14 +65,14 @@ class Player(pygame.sprite.Sprite):
             self.pos_y = platform.rect.top
             self.can_jump = True
 
-            self.image = self.images[0]
+            #self.image = self.images[0]
 
     def jump(self):
         if self.can_jump:
             self.vel_y = -15
             self.can_jump = False
 
-            self.image = self.images[10]
+            #self.image = self.images[10]
 
     def update_pos(self):
         self.vel_y += PLAYER_GRAV
@@ -78,8 +81,12 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         if self.playing:
             self.update_pos()
-
             self.rect.bottom = self.pos_y
+
+            self.index += 1
+            if self.index >= len(self.images):
+                self.index = 0
+            self.image = self.images[self.index]
 
     def stop(self):
         self.playing = False
