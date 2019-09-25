@@ -1,4 +1,4 @@
-import glob
+
 import os
 
 import pygame
@@ -11,18 +11,26 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, left, bottom, dir_images):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image1 = pygame.image.load(os.path.join(dir_images, 'Walk (1.1).png'))
-        self.image2 = pygame.image.load(os.path.join(dir_images, 'Walk (2.2).png'))
+        self.images = (
+             pygame.image.load(os.path.join(dir_images, 'Walk (1.1).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (2.2).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (3.3).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (4.4).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (5).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (6).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (7).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (8).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (9).png')),
+             pygame.image.load(os.path.join(dir_images, 'Walk (10).png')),
+             pygame.image.load(os.path.join(dir_images, 'Jump (1).png')),
+             pygame.image.load(os.path.join(dir_images, 'Jump (2).png')),
+        )
 
-        self.listWalk = [self.image1, self.image2]
-        self.posImage = 0
-
-        self.imagesWalk = self.listWalk[self.posImage]
-
-        # self.image = pygame.Surface((40, 40))
+        self.image = self.images[0]
+        # self.image = pygame.Surface((40,1, 40))
         # self.image.fill(BLUE)
 
-        self.rect = self.imagesWalk.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.left = left
         self.rect.bottom = bottom
 
@@ -45,6 +53,7 @@ class Player(pygame.sprite.Sprite):
         self.pos_y = wall.rect.top
         self.vel_y = 0
         self.can_jump = True
+        self.image = self.images[0]
 
     def validate_platform(self, platform):
         result = pygame.sprite.collide_rect(self, platform)
@@ -53,10 +62,14 @@ class Player(pygame.sprite.Sprite):
             self.pos_y = platform.rect.top
             self.can_jump = True
 
+            self.image = self.images[0]
+
     def jump(self):
         if self.can_jump:
             self.vel_y = -15
             self.can_jump = False
+
+            self.image = self.images[10]
 
     def update_pos(self):
         self.vel_y += PLAYER_GRAV
