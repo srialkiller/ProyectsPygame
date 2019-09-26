@@ -34,8 +34,11 @@ class Game:
         self.score = 0
         self.level = 0
         self.playing = True
+        self.background = pygame.image.load(os.path.join(self.dir_images, 'Background-1.png'))
+
         self.generate_elements()
         self.run()
+
 
     def generate_elements(self):
         self.platform = Platform()
@@ -74,7 +77,7 @@ class Game:
         for c in range(0, MAX_COINS):
             pos_x = random.randrange(last_position + 150, last_position + 300)
 
-            coin = Coin(pos_x, 130, self.dir_images)
+            coin = Coin(pos_x, 170, self.dir_images)
 
             last_position = coin.rect.right
 
@@ -104,7 +107,7 @@ class Game:
             self.new()
 
     def draw(self):
-        self.surface.fill(BLACK)
+        self.surface.blit(self.background, (0, 0))
         self.draw_text()
         self.sprites.draw(self.surface)
         pygame.display.flip()
