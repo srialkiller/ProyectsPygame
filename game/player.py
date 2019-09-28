@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
         self.playing = True
 
     def collide_with(self, sprites):
-        objects = pygame.sprite.spritecollide(self, sprites, False)
+        objects = pygame.sprite.spritecollide(self, sprites, False, pygame.sprite.collide_circle_ratio(0.8))
         if objects:
             return objects[0]
 
