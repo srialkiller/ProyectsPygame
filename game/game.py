@@ -1,6 +1,8 @@
 import os
 import random
 import sys
+import time
+
 import pygame
 from pygments.styles.rainbow_dash import WHITE
 
@@ -25,6 +27,7 @@ class Game:
         self.dir = os.path.dirname(__file__)
         self.dir_sounds = os.path.join(self.dir, 'sources/sounds')
         self.dir_images = os.path.join(self.dir, 'sources/sprites')
+
 
     def start(self):
         self.menu()

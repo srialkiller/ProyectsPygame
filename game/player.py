@@ -5,7 +5,6 @@ import pygame
 
 from .config import *
 
-
 class Player(pygame.sprite.Sprite):
 
     def __init__(self, left, bottom, dir_images):
@@ -24,10 +23,9 @@ class Player(pygame.sprite.Sprite):
              pygame.image.load(os.path.join(dir_images, 'Walk (10).png')),
         )
 
-        #self.image = self.images[0]
         self.index = 0
         self.image = self.images[self.index]
-
+        #self.image = self.images[0]
         # self.image = pygame.Surface((40,1, 40))
         # self.image.fill(BLUE)
 
@@ -67,7 +65,7 @@ class Player(pygame.sprite.Sprite):
 
     def jump(self):
         if self.can_jump:
-            self.vel_y = -12
+            self.vel_y = -15
             self.can_jump = False
 
     def update_pos(self):
@@ -83,7 +81,7 @@ class Player(pygame.sprite.Sprite):
             if self.index >= len(self.images):
                 self.index = 0
             self.image = self.images[self.index]
-            time.sleep(0.03)
+            time.sleep(0.02)
 
     def stop(self):
         self.playing = False
